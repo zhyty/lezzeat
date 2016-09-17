@@ -1,5 +1,4 @@
 class Restaurant < ActiveRecord::Base
-  # might not have a distance
   validates_presence_of :name, :rating, :review_count, :user_votes, :address, :image_url
   validates :rating, numericality: true
   validates :distance, numericality: true, allow_nil: true
@@ -12,11 +11,13 @@ class Restaurant < ActiveRecord::Base
   # parses params from a yelp business object
   def self.params_from_yelp_business(yelp_business, yelp_region_center)
     address = yelp_business.location.address.join(', ') << yelp_business.location.city
+
     params = {
         name: yelp_business.name, rating: yelp_business.rating, review_count: yelp_business.review_count,
         address: address, image_url: yelp_business.image_url, is_closed: yelp_business.is_closed
     }
 
+    # sometimes location coordinates aren't provided
     if yelp_business.location.coordinate
       # from yelp_response.region.center
       center_location = Location.new(yelp_region_center.latitude, yelp_region_center.longitude)
