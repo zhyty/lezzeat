@@ -11,7 +11,7 @@ class Location
       lat1_rad = first.lat * rad_per_deg
       lat2_rad = second.lat * rad_per_deg
 
-      a = Math.sin(lat_diff_rad/2.0)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(lon_diff_rad/2)**2
+      a = Math.sin(lat_diff_rad/2.0)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(lon_diff_rad/2.0)**2
       c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
 
       earth_radius * c # Delta in meters

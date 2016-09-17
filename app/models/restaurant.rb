@@ -8,7 +8,7 @@ class Restaurant < ActiveRecord::Base
   after_initialize :init
 
   def self.from_yelp_business(yelp_business)
-    self.class.new(name: yelp_business.name, rating: yelp_business.rating, )
+    self.class.new(name: yelp_business.name, rating: yelp_business.rating)
   end
 
   def init
