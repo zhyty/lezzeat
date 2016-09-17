@@ -1,0 +1,8 @@
+<h1>New Group Page</h1>
+<%= form_for @group do |f| %>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+    <%= f.label :radius %>
+    <%= f.text_field :radius %>
+    <%= f.submit 'create', class: 'btn btn-primary' %>
+<% end %>
