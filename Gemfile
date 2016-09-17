@@ -24,6 +24,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use bootstrap to help with frontend looks
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+# Use Yelp API for queries
+gem 'yelp', '~> 2.1', '>= 2.1.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
