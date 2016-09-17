@@ -2,7 +2,7 @@ class Restaurant < ActiveRecord::Base
   # name, rating, start_hour, end_hour, user_votes
 
   validates_presence_of :name, :rating, :start_hour, :end_hour
-  validates :rating, :numericality
+  validates :rating, numericality: true
 
   belongs_to :group
   after_initialize :init
