@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root 'group#index'
+  root 'groups#index'
+  get 'groups' => 'groups#index'
+  post 'groups' => 'groups#create'
+  get 'groups/new' => 'groups#new', as: :new_group
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
