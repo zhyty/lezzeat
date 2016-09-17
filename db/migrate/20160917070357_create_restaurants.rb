@@ -3,9 +3,13 @@ class CreateRestaurants < ActiveRecord::Migration
     create_table :restaurants do |t|
       t.belongs_to :group
       t.string :name
-      t.integer :rating
-      t.time :start_hour
-      t.time :end_hour
+      t.string :address
+      t.string :image_url
+      t.boolean :is_closed
+
+      t.float :rating
+      t.float :distance
+      t.integer :review_count
       t.integer :user_votes
     end
   end
