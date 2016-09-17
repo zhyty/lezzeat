@@ -29,6 +29,10 @@ gem 'yelp', '~> 2.1', '>= 2.1.2'
 # Fixing windows compatibility problems
 gem 'tzinfo-data'
 
+# Add material design sass plugin
+gem 'materialize-sass'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
