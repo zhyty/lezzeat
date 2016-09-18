@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'groups/:code' => 'groups#start_app'
   get 'groups/:code/app' => 'groups#app', :as => :app
   post 'groups/:code/app' => 'groups#submit_app'
+  get 'groups/:code/waiting' => 'groups#waiting'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

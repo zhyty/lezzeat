@@ -1,0 +1,7 @@
+<%= javascript_tag do %>
+    var GROUP_CODE = '<%= @group.code %>';
+    var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
+    var START_CHANNEL = false;
+<% end %>
+
+User count: <span id="user-count"><%= @user_count %></span>

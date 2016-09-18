@@ -1,0 +1,10 @@
+Peeps left: <%= @user_count %>
+<table>
+  <% @group.restaurants.each do |restaurant| %>
+      <tr>
+        <td><%= restaurant.id %></td>
+        <td><%= restaurant.name %></td>
+        <td>User votes: <%= restaurant.user_votes %></td>
+      </tr>
+  <% end %>
+</table>

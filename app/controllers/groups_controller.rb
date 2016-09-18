@@ -29,11 +29,6 @@ class GroupsController < ApplicationController
     broadcast_total(@group.code, @user_count)
   end
 
-  # group should be deleted at end of program
-  def delete
-    # TODO implement
-  end
-
   # deals with the form post to the group show page; layer of indirection
   def redirect
     if Group.find_by_code(params[:code])
@@ -45,14 +40,18 @@ class GroupsController < ApplicationController
 
   def results
     @group = Group.find_by_code(params[:code])
+    @user_count = @group.users.count
+  end
+
+  def waiting
+    @group = Group.find_by_code(params[:code])
+    @user_count = @group.users.count
   end
 
   # action associated with the list app
   def app
     @group = Group.find_by_code(params[:code])
     @user_count = @group.users.count
-    @user = User.find(session[:current_user_id])
-    @submitted_count = User.where(submitted: true).size
   end
 
   # post app
@@ -64,19 +63,12 @@ class GroupsController < ApplicationController
   end
 
   def submit_app
-    @group = Group.find_by_code(params[:code])
     @user = User.find(session[:current_user_id])
+    @user.submit_choices(params[:id])
+    @group = Group.find_by_code(params[:code])
+    broadcast_total(@group.code, @group.users.count)
 
-    # user can only submit once
-    if @user.submitted
-      flash[:notice] = t(:already_submitted)
-    else
-      @user.submit_choices(params[:id])
-      submitted_count = User.where(submitted: true).size
-      broadcast_submitted(@group.code, submitted_count)
-    end
-
-    redirect_to action: 'app'
+    redirect_to action: 'waiting'
   end
 
   private
@@ -88,11 +80,6 @@ class GroupsController < ApplicationController
   def broadcast_total(group_code, count)
     full = Broadcaster.full_channel(Broadcaster::USER_CHANNEL, group_code)
     Broadcaster.broadcast(full, { user_count: count })
-  end
-
-  def broadcast_submitted(group_code, submitted_count)
-    full = Broadcaster.full_channel(Broadcaster::SUBMITTED_CHANNEL, group_code)
-    Broadcaster.broadcast(full, { submitted_count: submitted_count })
   end
 
   def broadcast_start(group_code)

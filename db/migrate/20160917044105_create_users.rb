@@ -9,7 +9,6 @@ class CreateUsers < ActiveRecord::Migration
 
     create_table :users do |t|
       t.belongs_to :group
-      t.boolean :submitted
 
       t.timestamps null: false
     end
