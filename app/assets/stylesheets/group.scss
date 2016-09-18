@@ -17,7 +17,7 @@
 }
 span.stars, span.stars span {
   display: block;
-  background: url(images/stars.png) 0 -16px repeat-x;
+  background: url(stars.png) 0 -16px repeat-x;
   width: 80px;
   height: 16px;
 }
@@ -29,7 +29,6 @@ span.stars span {
   font-size: 15px;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
-  color: rgba(255,0,0,0.87);
 }
 
 .absolute-center{
@@ -43,4 +42,10 @@ span.stars span {
   bottom:15%;
   left:10%;
   position: absolute;
+}
+
+.list-row {
+  margin-bottom:auto;
+  margin-left:auto;
+  margin-right:auto;
 }
