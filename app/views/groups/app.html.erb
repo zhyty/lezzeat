@@ -1,7 +1,8 @@
 <%= javascript_tag do %>
     var GROUP_CODE = '<%= @group.code %>';
     var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
-    var START_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::START_CHANNEL, @group.code) %>';
+    var SUBMITTED_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::SUBMITTED_CHANNEL, @group.code) %>';
+    delete START_CHANNEL;
 <% end %>
 <h1>Main app</h1>
 <div>
@@ -11,10 +12,15 @@
  User count: <span id="user-count"><%= @user_count %></span>
 </div>
 <div>
-  Users submitted: <span id="user-submitted">0</span>
+  Users submitted: <span id="submitted-count"><%= @submitted_count %></span>
 </div>
-Current user session id: <%= session[:current_user_id] %>
-<%= form_tag app_path, method: 'patch'  do  %>
+<div>
+  Current user session id: <%= session[:current_user_id] %>
+</div>
+<div>
+  Current user submitted?: <%= @user.submitted %>
+</div>
+<%= form_tag app_path do %>
     <table>
       <% @group.restaurants.each do |restaurant| %>
           <tr>

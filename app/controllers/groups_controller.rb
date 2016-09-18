@@ -26,7 +26,7 @@ class GroupsController < ApplicationController
     @user_count = @group.users.count
 
     # broadcast count to faye
-    broadcast_count(@group.code, @user_count)
+    broadcast_total(@group.code, @user_count)
   end
 
   # group should be deleted at end of program
@@ -43,13 +43,16 @@ class GroupsController < ApplicationController
     end
   end
 
-  # action associated with the list app
-  def app
+  def results
     @group = Group.find_by_code(params[:code])
   end
 
-  def results
+  # action associated with the list app
+  def app
     @group = Group.find_by_code(params[:code])
+    @user_count = @group.users.count
+    @user = User.find(session[:current_user_id])
+    @submitted_count = User.where(submitted: true).size
   end
 
   # post app
@@ -61,6 +64,7 @@ class GroupsController < ApplicationController
   end
 
   def submit_app
+    @group = Group.find_by_code(params[:code])
     @user = User.find(session[:current_user_id])
 
     # user can only submit once
@@ -68,6 +72,8 @@ class GroupsController < ApplicationController
       flash[:notice] = t(:already_submitted)
     else
       @user.submit_choices(params[:id])
+      submitted_count = User.where(submitted: true).size
+      broadcast_submitted(@group.code, submitted_count)
     end
 
     redirect_to action: 'app'
@@ -79,9 +85,14 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:location, :radius)
   end
 
-  def broadcast_count(group_code, count)
+  def broadcast_total(group_code, count)
     full = Broadcaster.full_channel(Broadcaster::USER_CHANNEL, group_code)
     Broadcaster.broadcast(full, { user_count: count })
+  end
+
+  def broadcast_submitted(group_code, submitted_count)
+    full = Broadcaster.full_channel(Broadcaster::SUBMITTED_CHANNEL, group_code)
+    Broadcaster.broadcast(full, { submitted_count: submitted_count })
   end
 
   def broadcast_start(group_code)

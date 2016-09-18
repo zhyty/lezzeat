@@ -1,6 +1,7 @@
 /* global CLIENT_URL */
 /* global USER_CHANNEL */
 /* global START_CHANNEL */
+/* global SUBMITTED_CHANNEL */
 
 (function() {
     var appRemoteStart = function() {
@@ -25,8 +26,21 @@
         window.console.log("Listening to user count channel");
     };
 
+    var updateSubmittedCount = function() {
+        if (typeof SUBMITTED_CHANNEL === 'undefined') return;
+
+        var client = new Faye.Client(CLIENT_URL);
+        client.subscribe(SUBMITTED_CHANNEL, function(data) {
+            $('#submitted-count').text(data['submitted_count']);
+            window.console.log("Got " + data);
+        });
+
+        window.console.log("Listening to submitted count channel");
+    };
+
     $(document).on('turbolinks:load', function() {
         updateUserCount();
+        updateSubmittedCount();
         appRemoteStart();
     });
 })();
