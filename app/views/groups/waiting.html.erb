@@ -2,6 +2,8 @@
     var GROUP_CODE = '<%= @group.code %>';
     var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
     var START_CHANNEL = false;
+    var END_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::END_CHANNEL, @group.code) %>';
 <% end %>
 
+Waiting for other users...
 User count: <span id="user-count"><%= @user_count %></span>

@@ -2,6 +2,7 @@ class Broadcaster
   FAYE_URI = 'http://0.0.0.0:9292/faye'
   USER_CHANNEL = 'user_count'
   START_CHANNEL = 'start'
+  END_CHANNEL = 'end'
 
   # send data stored in msg (hash) through the channel
   def self.broadcast(channel, msg)

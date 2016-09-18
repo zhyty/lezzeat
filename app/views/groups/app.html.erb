@@ -15,7 +15,7 @@
 <%= form_tag app_path, id: 'list-form' do %>
     <ul class="collapsible popout" data-collapsible="accordion">
       <% @group.restaurants.each do |restaurant| %>
-          <li class="dismissable z-depth-1 restaurant-entry" style="padding-top:20px" data-id="<%= restaurant.id %>">
+          <li class="dismissable collection z-depth-1 restaurant-entry" style="padding-top:20px" data-id="<%= restaurant.id %>">
             <div class="collapsible-header row" style="margin-bottom: auto; margin-left: auto; margin-right: auto;">
               <div class="col s4">
                 <img class="responsive-img" src="<%= restaurant.image_url %>">
@@ -48,63 +48,3 @@
     </ul>
     <div class="row"><%= submit_tag 'Finish', class: 'btn-large col s12' %></div>
 <% end %>
-
-<div id="waiting-ui" style="display: none;">
-  <div class="row">
-    <div class="center-align">
-      <div class="preloader-wrapper big active center">
-        <div class="spinner-layer spinner-blue">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-red">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-yellow">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-green">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div>
-          <div class="gap-patch">
-            <div class="circle"></div>
-          </div>
-          <div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="center-align">
-      <h5 class="col s12 grey-text">Waiting for others to finish...</h5>
-      <h4 class="col s12">Placeholder left</h4>
-    </div>
-  </div>
-</div>

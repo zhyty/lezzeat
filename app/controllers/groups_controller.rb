@@ -40,7 +40,6 @@ class GroupsController < ApplicationController
 
   def results
     @group = Group.find_by_code(params[:code])
-    @user_count = @group.users.count
   end
 
   def waiting
@@ -66,9 +65,20 @@ class GroupsController < ApplicationController
     @user = User.find(session[:current_user_id])
     @user.submit_choices(params[:id])
     @group = Group.find_by_code(params[:code])
-    broadcast_total(@group.code, @group.users.count)
 
-    redirect_to action: 'waiting'
+    user_count = @group.users.count
+    broadcast_total(@group.code, user_count)
+
+    if user_count.zero?
+      broadcast_end(@group.code)
+      redirect_to action: 'results'
+    else
+      redirect_to action: 'waiting'
+    end
+  end
+
+  def end_app
+    redirect_to action: 'results'
   end
 
   private
@@ -85,6 +95,11 @@ class GroupsController < ApplicationController
   def broadcast_start(group_code)
     full = Broadcaster.full_channel(Broadcaster::START_CHANNEL, group_code)
     Broadcaster.broadcast(full, { dest: app_path })
+  end
+
+  def broadcast_end(group_code)
+    full = Broadcaster.full_channel(Broadcaster::END_CHANNEL, group_code)
+    Broadcaster.broadcast(full, { dest: results_path })
   end
 
   # error handling

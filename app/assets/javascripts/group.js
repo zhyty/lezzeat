@@ -1,6 +1,7 @@
 /* global CLIENT_URL */
 /* global USER_CHANNEL */
 /* global START_CHANNEL */
+/* global END_CHANNEL */
 
 (function() {
     $.fn.stars = function() {
@@ -14,6 +15,17 @@
             // Replace the numerical value with stars
             $(this).html($span);
         });
+    };
+
+    var appRemoteEnd = function() {
+        if (typeof END_CHANNEL === 'undefined' || !END_CHANNEL) return;
+
+        var client = new Faye.Client(CLIENT_URL);
+        client.subscribe(END_CHANNEL, function(data) {
+            window.location.replace(data['dest']);
+        });
+
+        window.console.log("Listening to end channel");
     };
 
     var appRemoteStart = function() {
@@ -41,6 +53,7 @@
     $(document).on('turbolinks:load', function() {
         updateUserCount();
         appRemoteStart();
+        appRemoteEnd();
 
         var $listForm = $('#list-form');
         var alertText = $('#alert').text();
