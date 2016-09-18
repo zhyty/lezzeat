@@ -60,7 +60,7 @@ class GroupsController < ApplicationController
     redirect_to action: 'app'
   end
 
-  def user_submit
+  def submit_app
     @user = User.find(session[:current_user_id])
 
     # user can only submit once

@@ -1,15 +1,20 @@
+<%= javascript_tag do %>
+    var GROUP_CODE = '<%= @group.code %>';
+    var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
+    var START_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::START_CHANNEL, @group.code) %>';
+<% end %>
 <h1>Main app</h1>
 <div>
   <%= flash[:notice] %>
 </div>
 <div>
- User count: <%= @user_count %>
+ User count: <span id="user-count"><%= @user_count %></span>
 </div>
 <div>
-  Users submitted: <%= @users_submitted %>
+  Users submitted: <span id="user-submitted">0</span>
 </div>
 Current user session id: <%= session[:current_user_id] %>
-<%= form_tag group_path, method: 'patch'  do  %>
+<%= form_tag app_path, method: 'patch'  do  %>
     <table>
       <% @group.restaurants.each do |restaurant| %>
           <tr>

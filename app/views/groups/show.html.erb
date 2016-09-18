@@ -3,10 +3,9 @@
     var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
     var START_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::START_CHANNEL, @group.code) %>';
 <% end %>
-
 <h1>You're in the Group <%= @group.code %></h1>
 
-<%= form_tag app_path do %>
+<%= form_tag group_path do %>
     <%= submit_tag 'Start the voting!' %>
 <% end %>
 

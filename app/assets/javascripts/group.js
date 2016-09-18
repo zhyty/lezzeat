@@ -8,7 +8,6 @@
 
         var client = new Faye.Client(CLIENT_URL);
         client.subscribe(START_CHANNEL, function(data) {
-            window.console.log("Hello!");
             window.location.replace(data['dest']);
         });
 
