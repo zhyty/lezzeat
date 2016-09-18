@@ -1,8 +1,18 @@
 <h1>Main app</h1>
-<% @group.restaurants.each do |restaurant| %>
-    <p><%= restaurant.name %></p>
-<% end %>
-<!-- TODO implement -->
-<%= form_tag nil do %>
+<div>
+  <%= flash[:notice] %>
+</div>
+Current user session id: <%= session[:current_user_id] %>
+<%= form_tag group_path, method: 'patch'  do  %>
+    <table>
+      <% @group.restaurants.each do |restaurant| %>
+          <tr>
+            <td><%= restaurant.id %></td>
+            <td><%= label_tag restaurant.id, restaurant.name %></td>
+            <td><%= check_box_tag 'id[]', restaurant.id, false, id: restaurant.id %></td>
+           <td>User votes: <%= restaurant.user_votes %></td>
+          </tr>
+      <% end %>
+    </table>
     <%= submit_tag 'Finish' %>
 <% end %>

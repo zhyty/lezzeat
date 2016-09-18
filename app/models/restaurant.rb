@@ -10,7 +10,7 @@ class Restaurant < ActiveRecord::Base
 
   # parses params from a yelp business object
   def self.params_from_yelp_business(yelp_business, yelp_region_center)
-    address = yelp_business.location.address.join(', ') << yelp_business.location.city
+    address = (yelp_business.location.address << yelp_business.location.city).join(', ')
 
     params = {
         name: yelp_business.name, rating: yelp_business.rating, review_count: yelp_business.review_count,

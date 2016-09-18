@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'groups' => 'groups#create'
   get 'groups/new' => 'groups#new', :as => :new_group
   get 'groups/:code' => 'groups#show', :as => :group
+  patch 'groups/:code' => 'groups#user_submit'
   get 'groups/:code/app' => 'groups#app', :as => :app
   post 'groups/redirect' => 'groups#redirect', :as => :group_redirect
 
