@@ -1,6 +1,6 @@
 <h1>Main app</h1>
 <% @group.restaurants.each do |restaurant| %>
-    <p><%= restaurant.name %></p>
+    <p><%= restaurant.name %>, id: <%= restaurant.id %>, votes: <%= restaurant.user_votes %></p>
 <% end %>
 <!-- TODO implement -->
 <%= form_tag nil do %>
