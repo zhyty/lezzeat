@@ -56,7 +56,6 @@ class GroupsController < ApplicationController
   def start_app
     @group = Group.find_by_code(params[:code])
     broadcast_start(@group.code)
-    puts 'broadcasting the start'
 
     redirect_to action: 'app'
   end

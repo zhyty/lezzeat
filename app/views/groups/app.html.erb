@@ -2,6 +2,12 @@
 <div>
   <%= flash[:notice] %>
 </div>
+<div>
+ User count: <%= @user_count %>
+</div>
+<div>
+  Users submitted: <%= @users_submitted %>
+</div>
 Current user session id: <%= session[:current_user_id] %>
 <%= form_tag group_path, method: 'patch'  do  %>
     <table>
