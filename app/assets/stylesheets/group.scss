@@ -6,7 +6,6 @@
   height: 100%;
 }
 
-
 .card :focus {
   outline: none !important;
   border: 1px solid red;
@@ -48,22 +47,4 @@ span.stars span {
   margin-bottom:auto;
   margin-left:auto;
   margin-right:auto;
-}
-
-.best-gold{
-  -webkit-box-shadow: 0px 0px 6px 1px rgba(255,242,0,1);
-  -moz-box-shadow:  0px 0px 6px 1px rgba(255,242,0,1);
-  box-shadow:  0px 0px 6px 1px rgba(255,242,0,1);
-}
-
-.best-silver{
-  -webkit-box-shadow:  0px 0px 6px 1px rgba(168,168,168,1);
-  -moz-box-shadow:  0px 0px 6px 1px rgba(168,168,168,1);
-  box-shadow:  0px 0px 6px 1px rgba(168,168,168,1);
-}
-
-.best-bronze{
-  -webkit-box-shadow:  0px 0px 6px 1px rgba(112,81,4,1);
-  -moz-box-shadow:  0px 0px 6px 1px rgba(112,81,4,1);
-  box-shadow:  0px 0px 6px 1px rgba(112,81,4,1);
 }

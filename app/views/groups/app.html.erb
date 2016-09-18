@@ -33,11 +33,9 @@
                 </div>
               </div>
             </div>
-
             <div class="collapsible-body">
-              <p>Distance: <%= restaurant.distance %>m</p>
+              <p>Distance: <%= restaurant.distance ? "#{(restaurant.distance/1000.0).round(2)} km" : 'Unknown' %></p>
               <p>Address: <%= restaurant.address %></p>
-              <p>User votes: <%= restaurant.user_votes %></p>
               <p>Review count: <%= restaurant.review_count %></p>
             </div>
           </li>

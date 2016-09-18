@@ -24,7 +24,7 @@ class Restaurant < ActiveRecord::Base
 
       # from yelp_response.businesses[business].location.coordinate
       business_location = Location.new(yelp_business.location.coordinate.latitude, yelp_business.location.coordinate.longitude)
-      params[:distance] = Location.distance(center_location, business_location)
+      params[:distance] = Location.distance(center_location, business_location).round
     end
 
     params

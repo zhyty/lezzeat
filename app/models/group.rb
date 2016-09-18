@@ -23,8 +23,8 @@ class Group < ActiveRecord::Base
     # only load restaurants once
     return true unless restaurants.empty?
 
-    response_1_to_20 = Yelp.client.search(self.location, term: 'restaurants', radius_filter: self.radius)
-    response_21_to_40 = Yelp.client.search(self.location, term: 'restaurants', offset: 20, radius_filter: self.radius)
+    response_1_to_20 = Yelp.client.search(self.location, term: 'restaurants', radius_filter: self.radius * 1000)
+    response_21_to_40 = Yelp.client.search(self.location, term: 'restaurants', offset: 20, radius_filter: self.radius * 1000)
 
     self.restaurants.create(Restaurant.params_from_yelp_response(response_1_to_20) + Restaurant.params_from_yelp_response(response_21_to_40))
     return true

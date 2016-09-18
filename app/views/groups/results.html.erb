@@ -1,8 +1,8 @@
 <h1 class="center-align">Result</h1>
 <div class="container">
-  <ul class="collapsible" data-collapsible="accordion">
+  <ul class="collapsible popout" data-collapsible="accordion">
     <% if @gold %>
-        <li class="best-gold">
+        <li>
           <div class="collapsible-header row" style='margin-bottom:auto; margin-left:0px; margin-right:0px'>
             <div class="row">
             </div>
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="collapsible-body">
-            <p>Distance: <%= @gold.distance %>m</p>
+            <p>Distance: <%= @gold.distance ? "#{(@gold.distance/1000.0).round(2)} km" : 'Unknown' %></p>
             <p>Address: <%= @gold.address %></p>
             <p>Review Count: <%= @gold.review_count %></p>
           </div>
@@ -39,7 +39,7 @@
     <% end %>
 
     <% if @silver %>
-        <li class="best-silver">
+        <li>
           <div class="collapsible-header row" style='margin-bottom:auto; margin-left:0px; margin-right:0px'>
             <div class="row">
             </div>
@@ -68,7 +68,7 @@
             </div>
           </div>
           <div class="collapsible-body">
-            <p>Distance: <%= @silver.distance %>m</p>
+            <p>Distance: <%= @silver.distance ? "#{(@silver.distance/1000.0).round(2)} km" : 'Unknown' %></p>
             <p>Address: <%= @silver.address %></p>
             <p>Review Count: <%= @silver.review_count %></p>
           </div>
@@ -76,7 +76,7 @@
     <% end %>
 
     <% if @bronze %>
-        <li class="best-bronze">
+        <li>
           <div class="collapsible-header row" style='margin-bottom:auto; margin-left:0px; margin-right:0px'>
             <div class="row">
             </div>
@@ -105,7 +105,7 @@
             </div>
           </div>
           <div class="collapsible-body">
-            <p>Distance: <%= @bronze.distance %>m</p>
+            <p>Distance: <%= @bronze.distance ? "#{(@bronze.distance/1000.0).round(2)} km" : 'Unknown' %></p>
             <p>Address: <%= @bronze.address %></p>
             <p>Review Count: <%= @bronze.review_count %></p>
           </div>
