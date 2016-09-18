@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Digitom</title>
+  <title>Lezzeat</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'http://localhost:9292/faye.js', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <%= javascript_tag do %>
-      var CLIENT_URL = '<%= Broadcaster::FAYE_URI %>';
+      var CLIENT_URL = window.location.origin + '<%= Broadcaster::FAYE_URI %>';
   <% end %>
 </head>
 <body>
   <nav>
     <div class="nav-wrapper">
-		<%= link_to 'App Title', root_path, class: 'brand-logo' %>
+		<%= link_to 'Lezzeat', root_path, class: 'brand-logo' %>
     </div>
   </nav>
   <div class="container">

@@ -1,7 +1,7 @@
 /* global CLIENT_URL */
 /* global USER_CHANNEL */
 /* global START_CHANNEL */
-/* global SUBMITTED_CHANNEL */
+/* global END_CHANNEL */
 
 (function() {
     $.fn.stars = function() {
@@ -15,26 +15,21 @@
             // Replace the numerical value with stars
             $(this).html($span);
         });
-    }
+    };
 
-    function find_remaining_restaurants() {
-        var elements = $.map($('.restaurant-id'), function (e) { return e.innerHTML; });
-        return elements;
-    }
+    var appRemoteEnd = function() {
+        if (typeof END_CHANNEL === 'undefined' || !END_CHANNEL) return;
 
-    function change_ui(ui_shown) {
-        ui_shown = ui_shown || 'wait';
-        if (ui_shown === 'wait') {
-            $('#waiting-ui')[0].style="display:block;";
-            $('#selection-ui')[0].style="display:none;";
-        } else {
-            $('#waiting-ui')[0].style="display:none;";
-            $('#selection-ui')[0].style="display:block;";
-        }
-    }
+        var client = new Faye.Client(CLIENT_URL);
+        client.subscribe(END_CHANNEL, function(data) {
+            window.location.replace(data['dest']);
+        });
+
+        window.console.log("Listening to end channel");
+    };
 
     var appRemoteStart = function() {
-        if (typeof START_CHANNEL === 'undefined') return;
+        if (typeof START_CHANNEL === 'undefined' || !START_CHANNEL) return;
 
         var client = new Faye.Client(CLIENT_URL);
         client.subscribe(START_CHANNEL, function(data) {
@@ -45,7 +40,7 @@
     };
 
     var updateUserCount = function() {
-        if (typeof USER_CHANNEL === 'undefined') return;
+        if (typeof USER_CHANNEL === 'undefined' || !USER_CHANNEL) return;
 
         var client = new Faye.Client(CLIENT_URL);
         client.subscribe(USER_CHANNEL, function(data) {
@@ -55,27 +50,31 @@
         window.console.log("Listening to user count channel");
     };
 
-    var updateSubmittedCount = function() {
-        if (typeof SUBMITTED_CHANNEL === 'undefined') return;
-
-        var client = new Faye.Client(CLIENT_URL);
-        client.subscribe(SUBMITTED_CHANNEL, function(data) {
-            $('#submitted-count').text(data['submitted_count']);
-            window.console.log("Got " + data);
-        });
-
-        window.console.log("Listening to submitted count channel");
-    };
-
     $(document).on('turbolinks:load', function() {
         updateUserCount();
-        updateSubmittedCount();
         appRemoteStart();
+        appRemoteEnd();
 
+        var $listForm = $('#list-form');
         var alertText = $('#alert').text();
+
         if (alertText.length) {
             Materialize.toast(alertText, 3000);
         }
+
+        $listForm.on('submit', function(ev) {
+            ev.preventDefault();
+
+            var res = [];
+
+            $('.restaurant-entry').each(function() {
+                res.push($(this).data('id'));
+            });
+
+            $.post($listForm.attr('action'), {id: res}).fail(function() {
+                window.alert("Couldn't send data to server :(. Please try again later");
+            });
+        });
 
         // load stars
         $('span.stars').stars();

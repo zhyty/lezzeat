@@ -1,13 +1,13 @@
 class Broadcaster
-  FAYE_URI = 'http://0.0.0.0:9292/faye'
+  FAYE_URI = ':9292/faye'
   USER_CHANNEL = 'user_count'
   START_CHANNEL = 'start'
-  SUBMITTED_CHANNEL = 'submitted_count'
+  END_CHANNEL = 'end'
 
   # send data stored in msg (hash) through the channel
   def self.broadcast(channel, msg)
     message = { channel: channel, data: msg }
-    uri = URI.parse(FAYE_URI)
+    uri = URI.parse("http://0.0.0.0#{FAYE_URI}")
     Net::HTTP::post_form(uri, message: message.to_json)
   end
 

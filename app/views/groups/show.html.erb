@@ -2,6 +2,7 @@
     var GROUP_CODE = '<%= @group.code %>';
     var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
     var START_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::START_CHANNEL, @group.code) %>';
+    var END_CHANNEL = false;
 <% end %>
 
 <div>
