@@ -1,10 +1,18 @@
 /* global CLIENT_URL */
 /* global USER_CHANNEL */
 
-$(document).on('turbolinks:load', function() {
-    var client = new Faye.Client(CLIENT_URL);
+(function() {
+    var updateUserCount = function() {
+        if (typeof USER_CHANNEL === 'undefined') return;
 
-    client.subscribe(USER_CHANNEL, function(data) {
-        $('#user-count').text(data['user_count']);
+        var client = new Faye.Client(CLIENT_URL);
+        client.subscribe(USER_CHANNEL, function(data) {
+            $('#user-count').text(data['user_count']);
+        });
+    };
+
+    $(document).on('turbolinks:load', function() {
+        updateUserCount();
     });
-});
+})();
+

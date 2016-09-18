@@ -1,3 +1,8 @@
+<%= javascript_tag do %>
+    var GROUP_CODE = '<%= @group.code %>';
+    var USER_CHANNEL = '<%= Broadcaster.url(Broadcaster::USER_CHANNEL, @group.code)%>';
+<% end %>
+
 <h1>You're in the Group <%= @group.code %></h1>
 <%= link_to 'Start the voting!', app_path %>
 <div>

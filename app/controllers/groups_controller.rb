@@ -15,22 +15,9 @@ class GroupsController < ApplicationController
     end
   end
 
-  # deals with the form post to the group show page; layer of indirection
-  def redirect
-    if Group.find_by_code(params[:code])
-      redirect_to action: 'show', code: params[:code]
-    else
-      not_found
-    end
-  end
-
   def show
     @group = Group.find_by_code(params[:code])
-
-    # check if group found
     not_found unless @group
-
-    # attempt to load restaurants
     not_valid_location unless @group.retrieve_restaurants
 
     # update session id and add user to group
@@ -38,7 +25,22 @@ class GroupsController < ApplicationController
     session[:current_user_id] = Group.add_user_by_code(params[:code])
     @user_count = @group.users.count
 
-    Broadcaster.broadcast(Broadcaster::USER_CHANNEL, { user_count: @user_count })
+    # broadcast count to faye
+    broadcast_count(@group.code, @user_count)
+  end
+
+  # group should be deleted at end of program
+  def delete
+    # TODO implement
+  end
+
+  # deals with the form post to the group show page; layer of indirection
+  def redirect
+    if Group.find_by_code(params[:code])
+      redirect_to action: 'show', code: params[:code]
+    else
+      not_found
+    end
   end
 
   # action associated with the list app
@@ -59,15 +61,15 @@ class GroupsController < ApplicationController
     redirect_to action: 'app'
   end
 
-  # group should be deleted at end of program
-  def delete
-    # TODO implement
-  end
-
   private
 
   def group_params
     params.require(:group).permit(:location, :radius)
+  end
+
+  def broadcast_count(group_code, count)
+    url = Broadcaster.url(Broadcaster::USER_CHANNEL, group_code)
+    Broadcaster.broadcast(url, { user_count: count })
   end
 
   # error handling
