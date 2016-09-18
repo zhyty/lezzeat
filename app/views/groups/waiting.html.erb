@@ -5,5 +5,60 @@
     var END_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::END_CHANNEL, @group.code) %>';
 <% end %>
 
-Waiting for other users...
-User count: <span id="user-count"><%= @user_count %></span>
+<div class="row">
+  <div class="center-align">
+    <div class="preloader-wrapper big active center">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-yellow">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-green">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="center-align">
+    <h5 class="col s12 grey-text">Waiting for others to finish...</h5>
+    <h4 class="col s12"><span id="user-count"><%= @user_count %></span> users left</h4>
+  </div>
+</div>

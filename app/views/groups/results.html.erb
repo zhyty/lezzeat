@@ -1,7 +1,7 @@
 <h1 class="center-align">Result</h1>
 <div class="container">
   <ul class="collapsible" data-collapsible="accordion">
-    <%= if @gold %>
+    <% if @gold %>
         <li class="best-gold">
           <div class="collapsible-header row" style='margin-bottom:auto; margin-left:0px; margin-right:0px'>
             <div class="row">
@@ -12,7 +12,7 @@
                   <h1 class = "center-align">1st</h1>
                 </div>
                 <div class="row">
-                  <h5 class="center-align"><%= @gold.user_votes %></h5>
+                  <h5 class="center-align"><%= @gold.user_votes %> votes</h5>
                 </div>
               </div>
               <div class = "col s4">
@@ -32,13 +32,13 @@
           </div>
           <div class="collapsible-body">
             <p>Distance: <%= @gold.distance %>m</p>
-            <p>Address:<%= @gold.address %></p>
+            <p>Address: <%= @gold.address %></p>
             <p>Review Count: <%= @gold.review_count %></p>
           </div>
         </li>
     <% end %>
 
-    <%= if @silver %>
+    <% if @silver %>
         <li class="best-silver">
           <div class="collapsible-header row" style='margin-bottom:auto; margin-left:0px; margin-right:0px'>
             <div class="row">
@@ -46,10 +46,10 @@
             <div class="row">
               <div class = "col s2">
                 <div class="row">
-                  <h1 class = "center-align">1st</h1>
+                  <h1 class = "center-align">2nd</h1>
                 </div>
                 <div class="row">
-                  <h5 class="center-align"><%= @silver.user_votes %></h5>
+                  <h5 class="center-align"><%= @silver.user_votes %> votes</h5>
                 </div>
               </div>
               <div class = "col s4">
@@ -69,13 +69,13 @@
           </div>
           <div class="collapsible-body">
             <p>Distance: <%= @silver.distance %>m</p>
-            <p>Address:<%= @silver.address %></p>
+            <p>Address: <%= @silver.address %></p>
             <p>Review Count: <%= @silver.review_count %></p>
           </div>
         </li>
     <% end %>
 
-    <%= if @bronze %>
+    <% if @bronze %>
         <li class="best-bronze">
           <div class="collapsible-header row" style='margin-bottom:auto; margin-left:0px; margin-right:0px'>
             <div class="row">
@@ -83,10 +83,10 @@
             <div class="row">
               <div class = "col s2">
                 <div class="row">
-                  <h1 class = "center-align">1st</h1>
+                  <h1 class = "center-align">3rd</h1>
                 </div>
                 <div class="row">
-                  <h5 class="center-align"><%= @bronze.user_votes %></h5>
+                  <h5 class="center-align"><%= @bronze.user_votes %> votes</h5>
                 </div>
               </div>
               <div class = "col s4">
@@ -106,7 +106,7 @@
           </div>
           <div class="collapsible-body">
             <p>Distance: <%= @bronze.distance %>m</p>
-            <p>Address:<%= @bronze.address %></p>
+            <p>Address: <%= @bronze.address %></p>
             <p>Review Count: <%= @bronze.review_count %></p>
           </div>
         </li>
