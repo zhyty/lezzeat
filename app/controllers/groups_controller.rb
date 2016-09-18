@@ -36,8 +36,9 @@ class GroupsController < ApplicationController
     # update session id and add user to group
     # user came in from different group
     session[:current_user_id] = Group.add_user_by_code(params[:code])
+    @user_count = @group.users.count
 
-    # TODO show count
+    Broadcaster.broadcast(Broadcaster::USER_CHANNEL, { user_count: @user_count })
   end
 
   # action associated with the list app
