@@ -20,13 +20,14 @@ class Group < ActiveRecord::Base
   end
 
   def retrieve_restaurants
-    self.restaurants.clear
+    # only load restaurants once
+    return true unless restaurants.empty?
 
     response_1_to_20 = Yelp.client.search(self.location, term: 'restaurants', radius_filter: self.radius)
     response_21_to_40 = Yelp.client.search(self.location, term: 'restaurants', offset: 20, radius_filter: self.radius)
 
     self.restaurants.create(Restaurant.params_from_yelp_response(response_1_to_20) + Restaurant.params_from_yelp_response(response_21_to_40))
-
+    return true
   rescue Yelp::Error::UnavailableForLocation
     Rails.logger.debug "Unable to retrieve restaurants for #{self.location}"
     return false
