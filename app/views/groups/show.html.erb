@@ -1,2 +1,7 @@
-<h1>You're in the Group <%= @group.code %></h1>
-<%= link_to 'Start the voting!', app_path, class: 'btn' %>
+<div class="absolute-center">
+  <div class="row">
+    <h1 class="center-align"><%= @group.code %></h1>
+  </div>
+  <div class="row"><%= link_to 'Start the voting!', app_path, class: 'btn btn-large waves-effect waves-light' %>
+  </div>
+</div>

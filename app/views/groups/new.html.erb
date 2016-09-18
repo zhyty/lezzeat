@@ -3,8 +3,8 @@
     <%= f.label :location, class: 'input-field' %>
     <%= f.text_field :location %>
     <%= f.label :radius %>
-    <div class="range-field">
-      <%= f.range_field :radius %>
-    </div>
-    <%= f.submit 'create', class: 'btn' %>
+    <p class="range-field">
+      <%= f.range_field :radius, min: '3', max:'40' %>
+    </p>
+    <%= f.submit 'create', class: 'btn waves-effect waves-light' %>
 <% end %>
