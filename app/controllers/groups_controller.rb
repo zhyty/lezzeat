@@ -34,6 +34,7 @@ class GroupsController < ApplicationController
     not_valid_location unless @group.retrieve_restaurants
 
     # update session id and add user to group
+    # user came in from different group
     session[:user_id] = Group.add_user_by_code(params[:code]) unless session[:user_id]
 
     # TODO show count

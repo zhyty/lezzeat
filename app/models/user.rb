@@ -5,12 +5,7 @@ class User < ActiveRecord::Base
   # choices should be an array of ids
   def submit_choices(choices)
     return if self.submitted
-
-    choices.each do |id|
-      # FIXME may throw
-      Restaurant.increment_counter(:user_votes, id)
-    end
-
+    choices.each { |id| Restaurant.increment_counter(:user_votes, id) }
     self.submitted = true
   end
 end
