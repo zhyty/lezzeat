@@ -3,6 +3,8 @@
     <%= f.label :location, class: 'input-field' %>
     <%= f.text_field :location %>
     <%= f.label :radius %>
-    <%= f.text_field :radius %>
-    <%= f.submit 'create' %>
+    <div class="range-field">
+      <%= f.range_field :radius %>
+    </div>
+    <%= f.submit 'create', class: 'btn' %>
 <% end %>
