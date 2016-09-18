@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <%= javascript_tag do %>
-      var CLIENT_URL = '<%= Broadcaster::FAYE_URI %>';
+      var CLIENT_URL = window.location.origin + '<%= Broadcaster::FAYE_URI %>';
   <% end %>
 </head>
 <body>
