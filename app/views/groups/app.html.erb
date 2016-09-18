@@ -20,16 +20,103 @@
 <div>
   Current user submitted?: <%= @user.submitted %>
 </div>
-<%= form_tag app_path do %>
-    <table>
-      <% @group.restaurants.each do |restaurant| %>
-          <tr>
-            <td><%= restaurant.id %></td>
-            <td><%= label_tag restaurant.id, restaurant.name %></td>
-            <td><%= check_box_tag 'id[]', restaurant.id, false, id: restaurant.id %></td>
-           <td>User votes: <%= restaurant.user_votes %></td>
-          </tr>
-      <% end %>
-    </table>
-    <%= submit_tag 'Finish' %>
-<% end %>
+<div id="selection-ui">
+  <%= form_tag app_path do %>
+      <ul class="collapsible popout" data-collapsible="accordion">
+        <% @group.restaurants.each do |restaurant| %>
+            <li class="dismissable z-depth-1">
+              <div class="hide restaurant-id"><%= restaurant.id %></div>
+              <div class="row">
+              </div>
+              <div class="collapsible-header row" style="margin-bottom: auto; margin-left: auto; margin-right: auto;">
+                <div class="col s4">
+                  <img class="responsive-img" src="<%= restaurant.image_url %>">
+                </div>
+                <div class="col s8">
+                  <div class="list-row row">
+                    <div class="col s8 flow-text"><%= restaurant.name %></div>
+                    <div class="col s4 store-status <%= restaurant.is_closed ? 'red-text' : 'green-text' %>">
+                      <%= restaurant.is_closed ? 'Closed' : 'Open' %></div>
+                  </div>
+                  <div class="list-row row">
+                    <div class="col s8">
+                      <p><span class="stars"><%= restaurant.rating %></span></p>
+                    </div>
+                    <div class="col s4">
+                      <span class="">$</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="collapsible-body">
+                <p>Distance: <%= restaurant.distance %>km</p>
+                <p>Address: <%= restaurant.address %></p>
+                <p>User votes: <%= restaurant.user_votes %></p>
+                <p>Review count: <%= restaurant.review_count %></p>
+              </div>
+            </li>
+        <% end %>
+      </ul>
+      <div class="row"><%= submit_tag 'Finish', class: 'btn-large col s12' %></div>
+  <% end %>
+</div>
+
+<div id="waiting-ui" style="display: none;">
+  <div class="row">
+    <div class="center-align">
+      <div class="preloader-wrapper big active center">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div>
+          <div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="center-align">
+      <h5 class="col s12 grey-text">Waiting for others to finish...</h5>
+      <h4 class="col s12">Placeholder left</h4>
+    </div>
+  </div>
+</div>

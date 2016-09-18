@@ -1,8 +1,10 @@
 <h1>New Group Page</h1>
-<%= form_for @group do |f| %>
-    <%= f.label :location %>
+<%= form_for @group, class: 'col s12' do |f| %>
+    <%= f.label :location, class: 'input-field' %>
     <%= f.text_field :location %>
     <%= f.label :radius %>
-    <%= f.text_field :radius %>
-    <%= f.submit 'create' %>
+    <p class="range-field">
+      <%= f.range_field :radius, min: '3', max:'40' %>
+    </p>
+    <%= f.submit 'create', class: 'btn waves-effect waves-light' %>
 <% end %>

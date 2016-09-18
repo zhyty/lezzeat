@@ -3,12 +3,15 @@
     var USER_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::USER_CHANNEL, @group.code)%>';
     var START_CHANNEL = '<%= Broadcaster.full_channel(Broadcaster::START_CHANNEL, @group.code) %>';
 <% end %>
-<h1>You're in the Group <%= @group.code %></h1>
-
-<%= form_tag group_path do %>
-    <%= submit_tag 'Start the voting!' %>
-<% end %>
 
 <div>
   User count: <span id="user-count"><%= @user_count %></span>
+</div>
+<div class="absolute-center">
+  <div class="row">
+    <h1 class="center-align"><%= @group.code %></h1>
+  </div>
+  <%= form_tag group_path do %>
+      <%= submit_tag 'Start the voting!', class: 'btn btn-large waves-effect waves-light' %>
+  <% end %>
 </div>
