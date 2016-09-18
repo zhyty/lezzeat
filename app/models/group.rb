@@ -31,5 +31,8 @@ class Group < ActiveRecord::Base
   rescue Yelp::Error::UnavailableForLocation
     Rails.logger.debug "Unable to retrieve restaurants for #{self.location}"
     return false
+  rescue Yelp::Error::AreaTooLarge
+    Rails.logger.debug "Radius too large: #{self.radius}"
+    return false
   end
 end

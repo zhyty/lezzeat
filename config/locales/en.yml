@@ -23,3 +23,4 @@ en:
   hello: "Hello world"
   group_not_found: "Sorry, we couldn't find your group!"
   location_not_found: "Sorry, we couldn't find your location!"
+  invalid_group: "Invalid arguments!"

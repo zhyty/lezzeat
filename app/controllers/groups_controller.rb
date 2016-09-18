@@ -6,8 +6,13 @@ class GroupsController < ApplicationController
   end
 
   def create
-    # instantiate create object
-    redirect_to action: 'index'
+    @group = Group.create(group_params)
+
+    if @group.valid?
+      redirect_to action: 'show', code: @group.code
+    else
+      invalid_group
+    end
   end
 
   # deals with the form post to the group show page; layer of indirection
@@ -45,6 +50,17 @@ class GroupsController < ApplicationController
   end
 
   private
+
+  def group_params
+    params.require(:group).permit(:location, :radius)
+  end
+
+  # errors
+
+  def invalid_group
+    flash[:alert] = t(:invalid_group)
+    redirect_to action: 'new'
+  end
 
   def not_valid_location
     flash[:alert] = t(:location_not_found)
