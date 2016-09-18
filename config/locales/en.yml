@@ -21,3 +21,4 @@
 
 en:
   hello: "Hello world"
+  group_not_found: "Sorry, we couldn't find your group!"

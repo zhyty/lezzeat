@@ -1,2 +1,7 @@
 <h1>Hello</h1>
+<%= flash[:alert] %>
 <%= link_to 'Create a group!', new_group_path, class: 'btn btn-primary' %>
+<%= form_tag group_redirect_path do %>
+    <%= text_field_tag :code  %>
+    <%= submit_tag 'Join Group!' %>
+<% end %>

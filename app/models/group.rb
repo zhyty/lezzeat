@@ -1,12 +1,13 @@
 class Group < ActiveRecord::Base
-  # users, id, restaurants
+  # users, id, restaurants, code, location, radius
   # need to call destroy in order to get rid of users and restaurants (delete won't cut it)
   has_many :users, :dependent => :destroy
   has_many :restaurants, :dependent => :destroy
-  after_initialize :init
 
   validates_presence_of :location, :radius
   validates :radius, numericality: {only_integer: true}
+
+  after_initialize :init
 
   # returns id added or false if group doesn't exist
   def self.add_user_by_code(group_code)
