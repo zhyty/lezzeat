@@ -4,13 +4,12 @@
     var START_CHANNEL = false;
 <% end %>
 
-<h1>Main app</h1>
-<div>
- User count: <span id="user-count"><%= @user_count %></span>
-</div>
-<div>
-  Current user session id: <%= session[:current_user_id] %>
-</div>
+<p class="grey-text" style="margin-bottom:0px">Restaurants near</p>
+<h5 class="grey-text" style="margin-top:0px"><%= @group.location %></h5>
+
+<h4>
+  <i class="material-icons" id="user_count_icon">perm_identity</i><span id="user-count" class="emphasis-font"><%= @user_count %></span>
+</h4>
 
 <%= form_tag app_path, id: 'list-form' do %>
     <ul class="collapsible popout" data-collapsible="accordion">
@@ -41,5 +40,7 @@
           </li>
       <% end %>
     </ul>
-    <div class="row"><%= submit_tag 'Finish', class: 'btn-large col s12' %></div>
+    <div class="center-align">
+      <%= submit_tag 'Finish', class: 'btn red accent-2 col 8s', style: 'margin-bottom:25px' %>
+    </div>
 <% end %>
