@@ -1,5 +1,8 @@
 <h1>Hello</h1>
-<%= flash[:alert] %>
+<div>
+  <%= flash[:alert] %>
+</div>
+
 <%= link_to 'Create a group!', new_group_path %>
 <%= form_tag group_redirect_path do %>
     <%= text_field_tag :code  %>

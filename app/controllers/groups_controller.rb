@@ -48,6 +48,19 @@ class GroupsController < ApplicationController
     @group = Group.find_by_code(params[:code])
   end
 
+  def results
+    @group = Group.find_by_code(params[:code])
+  end
+
+  # post app
+  def start_app
+    @group = Group.find_by_code(params[:code])
+    broadcast_start(@group.code)
+    puts 'broadcasting the start'
+
+    redirect_to action: 'app'
+  end
+
   def user_submit
     @user = User.find(session[:current_user_id])
 
@@ -68,8 +81,13 @@ class GroupsController < ApplicationController
   end
 
   def broadcast_count(group_code, count)
-    url = Broadcaster.url(Broadcaster::USER_CHANNEL, group_code)
-    Broadcaster.broadcast(url, { user_count: count })
+    full = Broadcaster.full_channel(Broadcaster::USER_CHANNEL, group_code)
+    Broadcaster.broadcast(full, { user_count: count })
+  end
+
+  def broadcast_start(group_code)
+    full = Broadcaster.full_channel(Broadcaster::START_CHANNEL, group_code)
+    Broadcaster.broadcast(full, { dest: app_path })
   end
 
   # error handling
