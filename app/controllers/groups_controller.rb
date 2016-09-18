@@ -35,7 +35,7 @@ class GroupsController < ApplicationController
 
     # update session id and add user to group
     # user came in from different group
-    session[:user_id] = Group.add_user_by_code(params[:code]) unless session[:user_id]
+    session[:current_user_id] = Group.add_user_by_code(params[:code])
 
     # TODO show count
   end
@@ -43,6 +43,19 @@ class GroupsController < ApplicationController
   # action associated with the list app
   def app
     @group = Group.find_by_code(params[:code])
+  end
+
+  def user_submit
+    @user = User.find(session[:current_user_id])
+
+    # user can only submit once
+    if @user.submitted
+      flash[:notice] = t(:already_submitted)
+    else
+      @user.submit_choices(params[:id])
+    end
+
+    redirect_to action: 'app'
   end
 
   # group should be deleted at end of program
@@ -56,7 +69,7 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:location, :radius)
   end
 
-  # errors
+  # error handling
 
   def invalid_group
     flash[:alert] = t(:invalid_group)
