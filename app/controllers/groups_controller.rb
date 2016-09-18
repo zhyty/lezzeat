@@ -39,7 +39,10 @@ class GroupsController < ApplicationController
   end
 
   def results
-    @group = Group.find_by_code(params[:code])
+    list = Group.find_by_code(params[:code]).restaurants.order(user_votes: :desc)
+    @gold = list.first
+    @silver = list.second
+    @bronze = list.third
   end
 
   def waiting

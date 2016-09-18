@@ -6,6 +6,7 @@
   <%= javascript_include_tag 'application', 'http://localhost:9292/faye.js', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <%= javascript_tag do %>
       var CLIENT_URL = '<%= Broadcaster::FAYE_URI %>';
