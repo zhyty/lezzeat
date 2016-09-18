@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'groups' => 'groups#create'
   get 'groups/new' => 'groups#new', :as => :new_group
   get 'groups/:code' => 'groups#show', :as => :group
+  get 'groups/:code/app' => 'groups#app', :as => :app
   post 'groups/redirect' => 'groups#redirect', :as => :group_redirect
 
   # The priority is based upon order of creation: first created -> highest priority.
