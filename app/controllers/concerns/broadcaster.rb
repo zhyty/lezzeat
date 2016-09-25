@@ -7,7 +7,7 @@ class Broadcaster
   # send data stored in msg (hash) through the channel
   def self.broadcast(channel, msg)
     message = { channel: channel, data: msg }
-    uri = URI.parse("http://0.0.0.0#{FAYE_URI}")
+    uri = URI.parse("#{Rails.configuration.faye['faye_url']}#{FAYE_URI}")
     Net::HTTP::post_form(uri, message: message.to_json)
   end
 

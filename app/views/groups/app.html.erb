@@ -11,6 +11,7 @@
   <i class="material-icons" id="user_count_icon">perm_identity</i><span id="user-count" class="emphasis-font"><%= @user_count %></span>
 </h4>
 
+<!-- TODO filter closed -->
 <%= form_tag app_path, id: 'list-form' do %>
     <ul class="collapsible popout" data-collapsible="accordion">
       <% @group.restaurants.each do |restaurant| %>
