@@ -5,9 +5,7 @@
     var END_CHANNEL = false;
 <% end %>
 
-<h4>
-  <i class="material-icons" id="user_count_icon">perm_identity</i><span id="user-count" class="emphasis-font"><%= @user_count %></span>
-</h4>
+<%= render 'user_count' %>
 <div class="absolute-center">
   <div class="row">
     <h1 class="center-align"><%= @group.code %></h1>

@@ -2,14 +2,6 @@
   margin-bottom: 50px;
 }
 
-.emphasis-font {
-  font-family: 'Pacifico', sans-serif;
-}
-
-.fill-parent {
-  height: 100%;
-}
-
 .card :focus {
   outline: none !important;
   border: 1px solid red;
@@ -52,5 +44,17 @@ span.stars {
 }
 
 .restaurant-entry {
-  padding-top: 20px;
+  .collapsible-header {
+    $top-bottom-padding: 15px;
+    padding-top: $top-bottom-padding;
+    padding-bottom: $top-bottom-padding;
+  }
+
+  p {
+    line-height: 2;
+  }
+}
+
+.user-count-wrapper {
+  display: inline-block;
 }

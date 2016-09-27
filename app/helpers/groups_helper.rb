@@ -11,4 +11,8 @@ module GroupsHelper
       '<100 m'
     end
   end
+
+  def display_review_count(count)
+    count == 1 ? "#{count} review" : "#{count} reviews"
+  end
 end
