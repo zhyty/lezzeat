@@ -50,6 +50,18 @@
         window.console.log("Listening to user count channel");
     };
 
+    var showMobileWarning = function() {
+        if (!navigator.userAgent.includes('Mobi')) {
+            $("#mobile-warning-modal").openModal();
+        }
+    };
+
+    // document ready so that there's no infinite modal loop
+    $(function() {
+        showMobileWarning();
+    });
+
+    // for the rest of page loading
     $(document).on('turbolinks:load', function() {
         updateUserCount();
         appRemoteStart();
@@ -58,9 +70,7 @@
         var $listForm = $('#list-form');
         var alertText = $('#alert').text();
 
-        if (alertText.length) {
-            Materialize.toast(alertText, 3000);
-        }
+        if (alertText.length) Materialize.toast(alertText, 3000);
 
         $listForm.on('submit', function(ev) {
             ev.preventDefault();

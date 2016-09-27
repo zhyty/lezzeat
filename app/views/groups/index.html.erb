@@ -1,4 +1,15 @@
-<div id="alert" style="display:none"><%= flash[:alert] %></div>
+<!-- Mobile warning modal -->
+<div id="mobile-warning-modal" class="modal">
+  <div class="modal-content">
+    <h4>Are you on mobile?</h4>
+    <p>Unfortunately, this app currently only supports mobile devices. Desktop support coming soon.</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Okay</a>
+  </div>
+</div>
+
+<div id="alert" class="hide"><%= flash[:alert] %></div>
 
 <div class="row">
   <div class="col s12 m6" id="code-card">
