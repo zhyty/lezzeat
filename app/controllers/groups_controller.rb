@@ -16,13 +16,13 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group = Group.find_by_code(params[:code])
+    @group = Group.find_by_code(code_param)
     not_found unless @group
     not_valid_location unless @group.retrieve_restaurants
 
     # update session id and add user to group
     # user came in from different group
-    session[:current_user_id] = Group.add_user_by_code(params[:code])
+    session[:current_user_id] = Group.add_user_by_code(code_param)
     @user_count = @group.users.count
 
     # broadcast count to faye
@@ -31,32 +31,32 @@ class GroupsController < ApplicationController
 
   # deals with the form post to the group show page; layer of indirection
   def redirect
-    if Group.find_by_code(params[:code])
-      redirect_to action: 'show', code: params[:code]
+    if Group.find_by_code(code_param)
+      redirect_to action: 'show', code: code_param
     else
       not_found
     end
   end
 
   def results
-    list = Group.find_by_code(params[:code]).restaurants.order(user_votes: :desc)
+    list = Group.find_by_code(code_param).restaurants.order(user_votes: :desc)
     @restaurants = [list.first, list.second, list.third]
   end
 
   def waiting
-    @group = Group.find_by_code(params[:code])
+    @group = Group.find_by_code(code_param)
     @user_count = @group.users.count
   end
 
   # action associated with the list app
   def app
-    @group = Group.find_by_code(params[:code])
+    @group = Group.find_by_code(code_param)
     @user_count = @group.users.count
   end
 
   # post app
   def start_app
-    @group = Group.find_by_code(params[:code])
+    @group = Group.find_by_code(code_param)
     broadcast_start(@group.code)
 
     redirect_to action: 'app'
@@ -65,7 +65,7 @@ class GroupsController < ApplicationController
   def submit_app
     @user = User.find(session[:current_user_id])
     @user.submit_choices(params[:id])
-    @group = Group.find_by_code(params[:code])
+    @group = Group.find_by_code(code_param)
 
     user_count = @group.users.count
     broadcast_total(@group.code, user_count)
@@ -86,6 +86,10 @@ class GroupsController < ApplicationController
 
   def group_params
     params.require(:group).permit(:location, :radius)
+  end
+
+  def code_param
+    params[:code].downcase
   end
 
   def broadcast_total(group_code, count)
