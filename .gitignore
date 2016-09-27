@@ -16,5 +16,7 @@
 !/log/.keep
 /tmp
 
+/public/assets
+
 # ignore idea workspace files
 .idea
