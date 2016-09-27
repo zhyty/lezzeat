@@ -6,13 +6,12 @@
 (function() {
     $.fn.stars = function() {
         return $(this).each(function() {
-            // Get the value
-            var val = parseFloat($(this).html());
             // Make sure that the value is in 0 - 5 range, multiply to get width
+            var val = parseFloat($(this).html());
             var size = Math.max(0, (Math.min(5, val))) * 16;
+
             // Create stars holder
             var $span = $('<span />').width(size);
-            // Replace the numerical value with stars
             $(this).html($span);
         });
     };
@@ -74,9 +73,7 @@
 
         $listForm.on('submit', function(ev) {
             ev.preventDefault();
-
             var res = [];
-
             $('.restaurant-entry').each(function() {
                 res.push($(this).data('id'));
             });

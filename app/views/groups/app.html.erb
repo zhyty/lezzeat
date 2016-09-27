@@ -12,35 +12,33 @@
 </h4>
 
 <!-- TODO filter closed -->
+<ul class="collapsible popout" data-collapsible="accordion">
+  <% @group.restaurants.each do |restaurant| %>
+      <li class="dismissable collection-item restaurant-entry" data-id="<%= restaurant.id %>">
+        <div class="collapsible-header">
+          <div class="col s4">
+            <img class="responsive-img" src="<%= restaurant.image_url %>">
+          </div>
+          <div class="col s8">
+            <div class="col s9">
+              <p><%= restaurant.name %></p>
+            </div>
+            <div class="col s3 <%= restaurant.is_closed ? 'red-text' : 'green-text' %>">
+              <p><%= restaurant.is_closed ? 'Closed' : 'Open' %></p>
+            </div>
+            <div class="col s8">
+              <p><span class="stars"><%= restaurant.rating %></span> (<%= restaurant.review_count %>)</p>
+            </div>
+          </div>
+        </div>
+        <div class="collapsible-body">
+          <p><%= restaurant.address %> (<%= display_distance(restaurant.distance) %>)</p>
+        </div>
+      </li>
+  <% end %>
+</ul>
+
 <%= form_tag app_path, id: 'list-form' do %>
-    <ul class="collapsible popout" data-collapsible="accordion">
-      <% @group.restaurants.each do |restaurant| %>
-          <li class="dismissable collection z-depth-1 restaurant-entry" style="padding-top:20px" data-id="<%= restaurant.id %>">
-            <div class="collapsible-header row" style="margin-bottom: auto; margin-left: auto; margin-right: auto;">
-              <div class="col s4">
-                <img class="responsive-img" src="<%= restaurant.image_url %>">
-              </div>
-              <div class="col s8">
-                <div class="list-row row">
-                  <div class="col s8 flow-text"><%= restaurant.name %></div>
-                  <div class="col s4 store-status <%= restaurant.is_closed ? 'red-text' : 'green-text' %>">
-                    <%= restaurant.is_closed ? 'Closed' : 'Open' %></div>
-                </div>
-                <div class="list-row row">
-                  <div class="col s8">
-                    <p><span class="stars"><%= restaurant.rating %></span></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="collapsible-body">
-              <p>Distance: <%= restaurant.distance ? "#{(restaurant.distance/1000.0).round(2)} km" : 'Unknown' %></p>
-              <p>Address: <%= restaurant.address %></p>
-              <p>Review count: <%= restaurant.review_count %></p>
-            </div>
-          </li>
-      <% end %>
-    </ul>
     <div class="center-align">
       <%= submit_tag 'Finish', class: 'btn red accent-2 col 8s', style: 'margin-bottom:25px' %>
     </div>

@@ -19,11 +19,11 @@ class Group < ActiveRecord::Base
     self.code ||= Code::generate_unique_code
   end
 
-  # TODO move to restaurants class
   def retrieve_restaurants
     # only load restaurants once
     return true unless restaurants.empty?
 
+    # TODO move this to params_from_yelp_response?
     response = Yelp.client.search(self.location, term: 'restaurants', radius_filter: self.radius * 1000, limit: 15)
 
     self.restaurants.create(Restaurant.params_from_yelp_response(response))

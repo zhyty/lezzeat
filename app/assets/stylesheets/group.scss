@@ -20,16 +20,19 @@
   color: black;
 }
 
-span.stars, span.stars span {
-  display: block;
+span.stars {
+  display: inline-block;
   background: url(stars.png) 0 -16px repeat-x;
   width: 80px;
   height: 16px;
+
+  span {
+    position: absolute;
+    background: url(stars.png) 0 0 repeat-x;
+    height: 16px;
+  }
 }
 
-span.stars span {
-  background-position: 0 0;
-}
 .store-status {
   font-size: 15px;
   font-weight: normal;
@@ -48,8 +51,6 @@ span.stars span {
   position: absolute;
 }
 
-.list-row {
-  margin-bottom:auto;
-  margin-left:auto;
-  margin-right:auto;
+.restaurant-entry {
+  padding-top: 20px;
 }
